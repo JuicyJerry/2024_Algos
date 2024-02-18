@@ -31,3 +31,25 @@ var removeElement = function(nums, val) {
     }
     return index;
 }; 
+
+// SOLUTION 3
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    let i = 0;
+    let n = nums.length;
+    while (i < n) {
+        if (nums[i] == val) {
+            nums[i] = nums[n - 1];
+            // reduce array size by one
+            n--;
+        } else {
+            i++;
+        }
+    }
+
+    return n;
+}; 
