@@ -25,5 +25,27 @@ var thirdMax = function(nums) {
 // Time complexity : O(NlogN)
 // Space complexity : O(1)
 
-// SOLUTION 2 : max heap
+// SOLUTION 2 : sorting
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function(nums) {
+    nums.sort((a, b) => b - a);
+    let countedEl = 1;
+    let preEl = nums[0];
 
+    for (let i = 0; i < nums.length; i++) {
+        
+        if (nums[i] !== preEl) {
+            countedEl += 1;
+            preEl = nums[i];
+        }
+
+        if (countedEl === 3) {
+            return nums[i];
+        }
+    }
+
+    return nums[0];
+};
