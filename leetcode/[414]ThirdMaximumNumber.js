@@ -49,3 +49,32 @@ var thirdMax = function(nums) {
 
     return nums[0];
 };
+
+// SOLUTION 3
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function(nums) {
+    nums.sort((a, b) => b - a);
+    
+    let cnt = 1;
+    let prev = nums[0];
+    
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] != prev) {
+            cnt += 1;
+            prev = nums[i];
+        }
+        
+        if (cnt == 3) {
+            return nums[i];
+        }
+    }
+    
+    return nums[0];
+};
