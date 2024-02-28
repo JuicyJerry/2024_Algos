@@ -61,7 +61,42 @@ var spiralOrder = function(matrix) {
 
 
 // SOLUTION 2: Mark Visited Elements
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder = function(matrix) {
+    let visited = 101; // marking value
+    let rows = matrix.length;
+    let columns = matrix[0].length;
+    let directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    let currentDirection = 0;
+    let changeDirection = 0; // the time changing the direction
+    let row = 0;
+    let col = 0;
+    let result = [];
+    result.push(matrix[0][0]);
+    matrix[0][0] = visited;
 
+    while (changeDirection < 2) {
+        while (
+            row + directions[currentDirection][0] >= 0 && 
+            row + directions[currentDirection][0] < rows &&
+            col + directions[currentDirection][1] >= 0 &&
+            col + directions[currentDirection][1] < columns &&
+            matrix[row + directions[currentDirection][0]]
+            [col + directions[currentDirection][1]] != visited) {
+                changeDirection = 0; // reset every step
+                row = row + directions[currentDirection][0]; // move next step
+                col = col + directions[currentDirection][1]; // move next step
+                result.push(matrix[row][col]);
+                matrix[row][col] = visited;
+            }
+        currentDirection = (currentDirection + 1) % 4; // chagne direction
+        changeDirection++;
+    }
+    return result; 
+};
 
 
 
