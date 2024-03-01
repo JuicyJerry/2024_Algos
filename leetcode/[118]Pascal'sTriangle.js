@@ -45,3 +45,6 @@ var generate = function(numRows) {
     
     return result;
 };
+
+// Time complexity: O(numRows^2)
+// Space complexity: O(1)
