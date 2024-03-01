@@ -102,8 +102,7 @@ var spiralOrder = function(matrix) {
     Space complexity: O(1). This is because we don't use other data structures. Remember that we don't include the output array in the space complexity.
 */
 
-// SOLUTION 3 : Why i get time exceeding error using if statement in for loop?
-]
+// SOLUTION 3 : Why i get time exceeding error using if statement in for loop
 /**
  * @param {number[][]} matrix
  * @return {number[]}

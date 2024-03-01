@@ -21,3 +21,27 @@ var generate = function(numRows) {
     console.log("result ===> ", result);
     return result;
 };
+
+// SOLUTION 1
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function(numRows) {
+    let result = [[1]];
+
+    for (let i = 1; i < numRows; i++) {
+        let temp = [];
+        temp.push(1);
+
+        if (i >= 2) {
+            for (let j = 0; j < i - 1; j++) {
+                temp.push(result[i - 1][j] + result[i - 1][j + 1]);
+            }
+        }
+        temp.push(1);
+        result.push(temp);
+    }
+    
+    return result;
+};
