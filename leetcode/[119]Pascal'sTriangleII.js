@@ -1,4 +1,4 @@
-// SOLUTION 1
+// SOLUTION 1 : 동적 프로그래밍(Dynamic Programming, DP)
 /**
  * @param {number} rowIndex
  * @return {number[]}
