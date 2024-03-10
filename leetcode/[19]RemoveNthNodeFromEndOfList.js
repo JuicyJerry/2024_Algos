@@ -12,19 +12,22 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-    let dummy = new ListNode(0);
-    dummy.next = head;
-    let first = dummy;
-    let second = dummy;
-    // Advances first pointer so that the gap between first and second is n nodes apart
-    for (let i = 1; i <= n + 1; i++) {
-        first = first.next;
+    if (head === null || head.next === null) return null;
+    let newNode = new ListNode(0);
+    newNode.next = head;
+    let dummy = newNode;
+
+    let tempNode = head;
+    let len = 0;
+    while (tempNode != null) {
+        len++;
+        tempNode = tempNode.next;
+    }    
+
+    for (let i = 0; i < len - n; i++) {
+        newNode = newNode.next;
     }
-    // Move first to the end, maintaining the gap
-    while (first != null) {
-        first = first.next;
-        second = second.next;
-    }
-    second.next = second.next.next;
+
+    newNode.next = newNode.next.next;
     return dummy.next;
 };
