@@ -37,23 +37,24 @@ MyLinkedList.prototype.addAtTail = function(val) {
 
 // Add a node of value val before the N-th node in the linked list.
 MyLinkedList.prototype.addAtIndex = function(index, val) {
+    if (index < 0 ||index > this.getLength()) return;
     if (index === 0) {
         return this.addAtHead(val);
     }
     if (index === this.getLength()) {
-        this.addAtTail(val);
-        return;
+        return this.addAtTail(val);
     }
-    if (index > this.getLength()) return;
-
+    
     let cur = this.head;
-    let node = new ListNode(val);
-    for (let i = 0; i < index-1; i++) {
+    for (let i = 0; i < index - 1; i++) {
+        if (cur.next === null) {
+            return; // If the next is null, index is out of bounds
+        }
         cur = cur.next;
     }
-    let next = cur.next;
-    cur.next = node;
-    node.next = next;
+
+    let newNode = new ListNode(val, cur.next);
+    cur.next = newNode;
 }
 
 // Delet the index-th node in the linked list.
