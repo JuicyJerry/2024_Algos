@@ -1,91 +1,83 @@
-function Node(val) {
-    this.val = val;
-    this.next = null;
+class ListNode {
+    constructor(val, next) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+    }
 }
 
+// Intialize my data structure.
 var MyLinkedList = function() {
     this.head = null;
-    this.size = 0;
-};
+}
 
-/** 
- * @param {number} index
- * @return {number}
- */
+// Get value of N-th node in linked list.
 MyLinkedList.prototype.get = function(index) {
+    if (index < 0 || index >= this.getLength()) return -1;
     let cur = this.head;
-    for (let i = 0; i < index; i++) {
-        cur = cur.next;
-    }    
+
+    while (index--) {cur = cur.next;}
     return cur.val;
-};
+}
 
-/** 
- * @param {number} val
- * @return {void}
- */
+// Add a node of value val before the first element of the linked list.
 MyLinkedList.prototype.addAtHead = function(val) {
-    const newNode = new Node(val);
-    console.log('[addAtHead] newNode ---> ', newNode);
-    newNode.next = this.head; // link to head
-    this.head = newNode; 
-    // newNode와 head는 연결된 상태인데, 왜 newNode를 할당하지? -> newNode를 새로운 head로 설정
-    // newNode.next = this.head;를 생략하고 바로 this.head = newNode;를 수행한다면, 새 노드는 이전 head를 가리키지 x
-    // 이전 head 노드와 뒤에 이어지는 노드들은 모두 "잃어버리게" 되어, 리스트에서 접근 x 
-    
-    this.size++;
-};
+    let node = new ListNode(val);
+    node.next = this.head;
+    this.head = node;
+}
 
-/** 
- * @param {number} val
- * @return {void}
- */
+// Add a node of value val after the last element of the linked list.
 MyLinkedList.prototype.addAtTail = function(val) {
-    const newNode = new Node(val);
-    console.log('[addAtTail] newNode ---> ', newNode);
-    let cur = this.head ? this.head : newNode;
-    while (cur.next != null) {
+    if (this.head === null) return this.addAtHead(val);
+    let node = new ListNode(val);
+    let cur = this.head;
+    while (cur.next != null) cur = cur.next;
+    cur.next = node;
+}
+
+// Add a node of value val before the N-th node in the linked list.
+MyLinkedList.prototype.addAtIndex = function(index, val) {
+    if (index === 0) {
+        return this.addAtHead(val);
+    }
+    if (index === this.getLength()) {
+        this.addAtTail(val);
+        return;
+    }
+    if (index > this.getLength()) return;
+
+    let cur = this.head;
+    let node = new ListNode(val);
+    for (let i = 0; i < index-1; i++) {
         cur = cur.next;
     }
-    cur.next = newNode;
-    this.size++;
-};
+    let next = cur.next;
+    cur.next = node;
+    node.next = next;
+}
 
-/** 
- * @param {number} index 
- * @param {number} val
- * @return {void}
- */
-MyLinkedList.prototype.addAtIndex = function(index, val) {
-    const newNode = new Node(val);
-    let cur = this.head ? this.head : newNode;
-    for (let i = 0; i < index - 1; i++) {
-        cur = this.cur.next;
-    }
-    newNode.next = cur.next;
-    cur.next = newNode;
-    this.size++;
-};
-
-/** 
- * @param {number} index
- * @return {void}
- */
+// Delet the index-th node in the linked list.
 MyLinkedList.prototype.deleteAtIndex = function(index) {
+   if (index < 0 || index >= this.getLength()) return;
+    if (index == 0) {
+        this.head = this.head.next;
+        return;
+    }
+
     let cur = this.head;
-    for (let i = 0; i < index - 1; i++) {
+    for (let i = 0; i < index-1; i++) {
         cur = cur.next;
     }
     cur.next = cur.next.next;
-    this.size--;
-};
+}
 
-/** 
- * Your MyLinkedList object will be instantiated and called as such:
- * var obj = new MyLinkedList()
- * var param_1 = obj.get(index)
- * obj.addAtHead(val)
- * obj.addAtTail(val)
- * obj.addAtIndex(index,val)
- * obj.deleteAtIndex(index)
- */
+// Get length of the linked list.
+MyLinkedList.prototype.getLength = function() {
+    let len = 0;
+    let cur = this.head;
+    while (cur !== null) {
+        cur = cur.next;
+        len++;
+    }
+    return len;
+}
