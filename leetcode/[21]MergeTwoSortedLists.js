@@ -1,3 +1,45 @@
+// Final : SUCCESS
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(list1, list2) {
+    let dummyHead = new ListNode(0);
+    let current = dummyHead;
+
+    while (list1 != null && list2 != null) {
+        if (list1.val > list2.val) {
+            current.next = list2;
+            list2 = list2.next;
+        } else {
+            current.next = list1;
+            list1 = list1.next;
+        }
+        current = current.next;
+    }
+    current.next = list1 ? list1 : list2;
+
+    return dummyHead.next;
+};
+
+/*
+    Time Complexity: O(n + m) - list1 길이(n), list2 길이(m)
+    Space Complexity: O(1) - 추가 데이터 구조 사용x, 재연결만 함
+*/
+
+
+// ===================================================================
+
+
+
 // Try 1
 /**
  * Definition for singly-linked list.
