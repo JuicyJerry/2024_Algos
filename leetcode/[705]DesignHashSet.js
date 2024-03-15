@@ -1,3 +1,104 @@
+// Try3: SUCCESS
+var MyHashSet = function() {
+    this.arr = [];
+    this.size = 0;
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.add = function(key) {
+    if (!this.contains(key)) {
+        this.arr.push(key);
+        this.size++;
+    } 
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.remove = function(key) {
+    if (this.contains(key)) {
+        let targetIndex = this.arr.indexOf(key);
+        this.arr.splice(targetIndex, 1);
+        this.size--;
+    }
+};
+
+/** 
+ * @param {number} key
+ * @return {boolean}
+ */
+MyHashSet.prototype.contains = function(key) {
+    let targetIndex = this.arr.indexOf(key);
+    let isContain = false;
+    isContain = targetIndex > -1 ? true : false;
+    return isContain;
+};
+
+/** 
+ * Your MyHashSet object will be instantiated and called as such:
+ * var obj = new MyHashSet()
+ * obj.add(key)
+ * obj.remove(key)
+ * var param_3 = obj.contains(key)
+ */
+
+
+// TRY4: SUCCESS
+var MyHashSet = function() {
+    this.hash_set = {};
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.add = function(key) {
+    this.hash_set[key] = key;
+};
+
+/** 
+ * @param {number} key
+ * @return {void}
+ */
+MyHashSet.prototype.remove = function(key) {
+    delete this.hash_set[key];
+};
+
+/** 
+ * @param {number} key
+ * @return {boolean}
+ */
+MyHashSet.prototype.contains = function(key) {
+    return key in this.hash_set;
+};
+
+/** 
+ * Your MyHashSet object will be instantiated and called as such:
+ * var obj = new MyHashSet()
+ * obj.add(key)
+ * obj.remove(key)
+ * var param_3 = obj.contains(key)
+ */
+
+
+
+
+
+
+
+
+// =======================================================================
+
+
+
+
+
+
+
 function MyHashSet() {
     this.bucketArray = [];
     this.bucketSize = 1000; // 버킷의 크기를 정의 (이 예시에서는 1000으로 설정)
@@ -87,3 +188,5 @@ MyHashSet.prototype.contains = function(key) {
  * obj.remove(key)
  * var param_3 = obj.contains(key)
  */
+
+
