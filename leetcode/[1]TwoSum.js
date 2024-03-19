@@ -33,3 +33,6 @@ var twoSum = function(nums, target) {
 
     return result;
 };
+
+// TIME COMPLEXITY: O(n log n)
+// SPACE COMPLEXITY: O(n)
