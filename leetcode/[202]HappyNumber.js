@@ -1,3 +1,30 @@
+// TRY3: SUCCESS
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy = function(n) {
+    let set = {};
+    while (n != 1) {
+        n = handleHappyNumber(n);    
+        if (set[n]) break;
+        else set[n] = true;
+    }
+    
+    return n === 1 ? true : false;
+};
+
+var handleHappyNumber = function(n) {
+    return n.toString(10).split('').reduce((acc, cur) => acc + Math.pow(cur, 2), 0);
+};
+
+
+
+// =============================================================
+
+
+
+
 // TRY2: 
 /**
  * @param {number} n
