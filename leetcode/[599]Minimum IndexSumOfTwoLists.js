@@ -1,3 +1,4 @@
+// TRY1: SUCCESS
 /**
  * @param {string[]} list1
  * @param {string[]} list2
