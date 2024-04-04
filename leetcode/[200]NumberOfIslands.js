@@ -34,3 +34,6 @@ const traverse = (queue, grid) => {
         }
     }
 }
+
+// Time Complexity: O(mn) // 걸리는 시간 + 입력의 크기 사이의 관계
+// Space Complexity: O(mn) // 메모리 사용량 + 크기 사이 관계
