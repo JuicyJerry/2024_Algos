@@ -1,3 +1,46 @@
+// TRY2: 최적화
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+
+var numIslands = function(grid) {
+    if (!grid || !grid.length) return 0;
+    
+    let islands = 0;
+    const row = grid.length, col = grid[0].length;
+    
+    for (let i = 0; i < row; ++i) {
+        for (let j = 0; j < col; ++j) {
+            if (grid[i][j] === '1') {
+                bfs(i, j);
+                islands++;
+            }
+        }
+    }
+    function bfs(i, j) {
+        const queue = [[i, j]];
+        grid[i][j] = '0'; // 방문한 셀을 바로 '0'으로 변경
+        
+        while (queue.length) {
+            const [x, y] = queue.shift();
+            const directions = [[0, -1], [0, 1], [-1, 0], [1, 0]];
+            
+            for (let [dx, dy] of directions) {
+                const newX = x + dx, newY = y + dy;
+                if (newX >= 0 && newX < row && newY >= 0 && newY < col && grid[newX][newY] === '1') {
+                    queue.push([newX, newY]);
+                    grid[newX][newY] = '0'; // 큐에 추가하는 즉시 방문 처리
+                }
+            }
+        }
+    }
+    
+    return islands;
+};
+
+
+
 // BFS
 /**
  * @param {character[][]} grid
