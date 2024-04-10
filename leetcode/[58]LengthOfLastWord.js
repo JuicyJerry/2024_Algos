@@ -11,3 +11,25 @@ var lengthOfLastWord = function(s) {
 
 // TIME COMPEXITY: O(N);
 // SPACE COMPEXITY: O(N);
+
+// TRY2 
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+    let i = s.length;
+    let len = 0;
+    while (i) {
+        if (len > 0 && (s[i - 1] === " " || s[i - 1] === undefined)) break;
+        if (s[i - 1] === " ") {
+            i--;
+            continue;
+        } 
+
+        len++;
+        i--;
+    }
+    
+    return len === 0 ? s.length : len;
+};
