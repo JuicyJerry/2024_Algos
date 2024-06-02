@@ -13,13 +13,10 @@ class Solution:
             
             while num > 0:
                 summation += num % 10
-                num // 10
+                num //= 10
             return summation
 
         product = productOfDigits(n)
         summation = sumOfDigits(n)
-
-        print(product)
-        print(summation)
 
         return product - summation
