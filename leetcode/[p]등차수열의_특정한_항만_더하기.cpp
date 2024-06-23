@@ -9,3 +9,4 @@ int solution(int a, int d, vector<bool> included) {
     for(int i = 0; i < included.size(); i++) if(included[i]) sum += seq[i]; 
     return sum;
 }
+
