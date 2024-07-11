@@ -15,3 +15,13 @@ vector<string> solution(string my_string) {
     sort(v.begin(), v.end());
     return v;
 }
+
+// 다른 풀이
+vector<string> solution(string my_string) {
+    vector<string> answer;
+    for (int i = 0; i < my_string.length(); i++)
+        answer.push_back(my_string.substr(i));
+    sort(answer.begin(), answer.end());
+    return answer;
+}
+
