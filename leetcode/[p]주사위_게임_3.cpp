@@ -64,3 +64,57 @@ int solution(int a, int b, int c, int d) {
     
     return answer;
 }
+
+// #실패
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d) {
+    // 4개 같은 숫자 : 1111 x p
+    // 3개 같은 숫자 + 1개 다른 숫자 : (10 * p + q)^2
+    // 2개 같은 숫자 + 2개 같은 숫자 : (p + q) * |p - q|
+    // 2개 같은 숫자 + 1개 다른 숫자 + 1개 다른 숫자 : q * r
+    // 모두 다른 숫자 : 가장 작은 숫자
+    
+    int ans = 0;
+    map<int, int> m;
+    m[a]++;    
+    m[b]++;    
+    m[c]++;    
+    m[d]++;    
+    
+        
+    for (auto iter = m.begin(); iter != m.end(); iter++) {
+        cout << iter->first << " " << iter->second << "\n";
+
+        if (iter->second == 4) {
+            ans = 1111 * iter->first;
+        } else if (iter->second == 3) {
+           
+        } else if (iter->second == 2) {
+            ans = 1;
+            for (auto it = m.begin(); it != m.end(); it++) {
+                if (it->second != 2) {
+                    ans *= it->first;
+                } else {
+                    (iter->first + it->first) * abs(iter->first - it->first);
+                }
+            }
+            break;
+        } else {
+            if (iter->second == 3) {
+                for (auto it = m.begin(); it != m.end(); it++) {
+                    if (it->second != 3) {
+                        ans = (10 * iter->first + it->first) * (10 * iter->first + it->first);
+                    }
+                }
+            } else {
+                ans = min({a, b, c, d});
+                break;
+            }
+        }
+    }
+    
+    return ans;
+}
