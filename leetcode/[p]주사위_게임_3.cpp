@@ -118,3 +118,71 @@ int solution(int a, int b, int c, int d) {
     
     return ans;
 }
+
+// 성공
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d) {
+    // 4개 같은 숫자 : 1111 x p
+    // 3개 같은 숫자 + 1개 다른 숫자 : (10 * p + q)^2
+    // 2개 같은 숫자 + 2개 같은 숫자 : (p + q) * |p - q|
+    // 2개 같은 숫자 + 1개 다른 숫자 + 1개 다른 숫자 : q * r
+    // 모두 다른 숫자 : 가장 작은 숫자
+    
+    // 4개 같은 숫자
+    if (a == b && b == c && c == d) return 1111 * a;
+    int dice[7] = {0};
+    dice[a]++;
+    dice[b]++;
+    dice[c]++;
+    dice[d]++;
+    
+    int p = 0;
+    // 3개 같은 숫자
+    for (int i = 1; i <= 6; i++) {
+        if (dice[i] == 3) {
+            p = i;
+            
+            for (int j = 1; j <= 6; j++) {
+                if (dice[j] == 1) {
+                    return (10 * p + j) * (10 * p + j);
+                }
+            }
+        }
+    }
+    
+    // 2개 같은 숫자 + 2개 같은 숫자
+    for (int i = 1; i <= 6; i++) {
+        if (dice[i] == 2) {
+            p = i;
+            
+            for (int j = 1; j <= 6; j++) {
+                if (i != j && dice[j] == 2) {
+                    return (p + j) * abs(p - j);
+                }
+            }
+        }
+    }
+    
+    // 2개 같은 숫자 + 나머지 다른 숫자
+    for (int i = 1; i <= 6; i++) {
+        if (dice[i] == 2) {
+            int q = 0, r = 0;
+            for (int j = 1; j <= 6; j++) {
+                if (i != j && dice[j] == 1) {
+                    if (q == 0) {
+                        q = j;
+                    } else {
+                        r = j;
+                    }
+                }
+            }
+            return q * r;
+        }
+    }
+    
+    // 모두 1개 숫자
+    return min({a, b, c, d});
+}
