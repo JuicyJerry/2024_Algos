@@ -8,4 +8,4 @@ int solution(vector<int> num_list) {
         if (num_list[i] < 0) return i;
     }
     return -1;
-}
+} 

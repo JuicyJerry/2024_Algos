@@ -27,4 +27,4 @@ vector<int> solution(int n, vector<int> slicer, vector<int> num_list) {
     }
     
     return ans;
-}
+} 
