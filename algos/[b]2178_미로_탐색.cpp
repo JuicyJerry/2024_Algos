@@ -1,42 +1,36 @@
-// #1 : answer
-
-
-// #1 : fail
 #include <bits/stdc++.h>
 using namespace std;
-int n, m, cnt = 1;
-vector<int> v[101][101];
+const int mx_n = 104;
 int dy[] = {-1, 0, 1, 0};
 int dx[] = {0, 1, 0, -1};
-int visited[101][101];
-
-void go(int y, int x) {
-    visited[y][x] = 1;
-    for (int i = 0; i < 4; i++) {
-        int ny = y + dy[y];
-        int nx = x + dx[x];
-         if (nx < 0 || nx > x || ny < 0 || ny > y) continue;
-        if (visited[ny][nx] == 0) continue;
-    }
-    
-}
+int n, m, y, x, visited[mx_n][mx_n], a[mx_n][mx_n];
 int main() {
-    cin >> n >> m;
+    // cin >> n >> m;
+    scanf("%d %d", &n, &m);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            cin >> v[i][j];
+            // cin >> a[i][j];
+            scanf("%1d", &a[i][j]);
         }
     }
     
-    for (int y = 0; y < n; y++) {
-        for (int x = 0; x < m; x++) {
-            if (v[y][x] == 0 && visited[y][x]) continue;
-            go(y, x);
-            cnt++;
+    queue<pair<int, int>> q;
+    visited[0][0] = 1;
+    q.push({0, 0});
+    while(q.size()) {
+        tie(y,x) = q.front(); q.pop();
+        for(int i = 0; i < 4; i++) {
+            int ny = y + dy[i];
+            int nx = x + dx[i];
+            if (ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
+            if (visited[ny][nx]) continue;
+            if (a[ny][nx] == 0) continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny, nx});
         }
     }
     
-    cout << cnt << "\n";
-    
+    // cout << visited[n - 1][m - 1];
+    printf("%d", visited[n - 1][m - 1]); 
     return 0;
 }
